@@ -145,3 +145,12 @@ a {
 /* .carousel-item{
   transition: 1000ms;
 } */
+#box{
+  box-shadow: 20px -10px 30px;
+  z-index: 0;
+}
+#formContainer{
+  box-shadow: 20px -10px 50px;
+
+  z-index: 1;
+}
