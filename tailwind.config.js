@@ -7,19 +7,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        red1: "#E5285C",
+        papaya: "#FDF0D5",
 
-        red2: "#FF3364",
+        magenta1: "#D81E5B",
 
-        pink1: "#FF97B0",
+        orange1: "#F0544F",
 
-        pink2: "#FFCBD7",
+        black1: "#3a3335",
 
-        black1: "#1E1E1E",
-
-        grey1: "#8D8D8D",
-
-        grey2: "#BABABA"
+        ashgray: "#C6D8D3"
       }
 },
    
