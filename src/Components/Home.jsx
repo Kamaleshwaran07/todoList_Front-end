@@ -13,7 +13,7 @@ const Home = () => {
 
  
     return (
-      <div>
+      <div className='sedan'>
         {/* Hero Section */}
         <div className="grid grid-cols-3 hero gap-4">
           <div className="heroHead absolute mt-56 ml-20 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[30rem]">
@@ -49,7 +49,7 @@ const Home = () => {
         {/*Testimonials */}
         <div
           id="carouselExampleAutoplaying"
-          class="carousel slid  h-[20em] relative mx-auto bg-black"
+          class="carousel slid  h-[20em] relative mx-auto bg-black text-papaya"
           data-bs-ride="carousel"
         >
           <div class="carousel-inner pt-24 relative mx-auto my-auto flex justify-center">
@@ -61,7 +61,7 @@ const Home = () => {
                   alt="..."
                 />
                 <div className="">
-                  <h1 className="text-xl text-red2">Sarah Johnson</h1>
+                  <h1 className="text-xl text-magenta1 font-bold">Sarah Johnson</h1>
                   <p className="text-normal font-normal text-grey1 mt-2">
                     "TodoLoo transformed my task management approach! The
                     animations are fantastic, and the platform keeps me
@@ -75,7 +75,7 @@ const Home = () => {
               <div className="flex items-center justify-center">
                 <img src={man} class="rounded-full w-32 h-32 me-3" alt="..." />
                 <div>
-                  <h1 className="text-red1 text-xl">Lucas Evans</h1>
+                  <h1 className="text-magenta1 font-bold text-xl">Lucas Evans</h1>
                   <p className="text-normal font-normal text-grey1 mt-2">
                     "TodoLoo is a game-changer! The interactive features make
                     task management enjoyable, and the community aspect is
@@ -93,7 +93,7 @@ const Home = () => {
                   alt="..."
                 />
                 <div>
-                  <h1 className="text-red1 text-xl">Emma Phillman</h1>
+                  <h1 className="text-magenta1 font-bold text-xl">Emma Phillman</h1>
                   <p className="text-normal font-normal text-grey1 mt-2">
                     "Obsessed with this todo list platform! The animated
                     reminders are a game-changer, and the collaboration tools

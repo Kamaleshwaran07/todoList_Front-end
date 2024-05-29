@@ -2,12 +2,14 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import yuppassword from 'yup-password'
+import Cookies from 'js-cookies'
 // import ToastContainer from './ToastContainer';
 
 
-const Signup = ({baseurl}) => {
+const Signup = ({baseurl, setIsAuthenticated}) => {
   const [data, setData] = useState({
     email: '',
     name: '',
@@ -51,7 +53,7 @@ const [show, setShow] = useState(true);
   });
   
   
-  const formik = useFormik(({
+  const signupformik = useFormik(({
     initialValues: data,
     validationSchema: schema,
     onSubmit: async (values) => {
@@ -59,7 +61,7 @@ const [show, setShow] = useState(true);
         const response = await axios.post(`${baseurl}/signup`, values)
         console.log(values);
         setResponseMsg(response.data.message)
-        
+        data()
         successNotify()
       } catch (error) {
         setErrorMsg(error.response.data.message)
@@ -70,10 +72,47 @@ const [show, setShow] = useState(true);
     }
   }
 )
-) 
+  )
+  const navigate = useNavigate()
+  const loginSchema = yup.object().shape({
+    email: yup
+      .string()
+      .matches(
+        /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/,
+        "Invalid email"
+      )
+      .required("Email is required"),
+    password: yup
+      .string().required("Password is required")
+  })
+  const loginFormik = useFormik(({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      try {
+        console.log(values);
+      const response = await axios.post(`${baseurl}/login`, values)
+      setResponseMsg(response.data.message)
+      // localStorage.setItem('token', response.data.token )
+        Cookies.setItem('token', response.data.token)
+        Cookies.setItem('userId', response.data.userId)
+        setIsAuthenticated(true)
+      successNotify()
+      navigate("/dashboard")
+  
+} catch (error) {
+        setErrorMsg(error.response.data.message)
+        errorNotify()
+}
+
+    }
+}))   
 
   const handleConfirmPassword = () => {
-    if (formik.values.password !== formik.values.confirmpassword) {
+    if (signupformik.values.password !== signupformik.values.confirmpassword) {
       toast.error("Password doesn't match")
     }
   }
@@ -88,10 +127,10 @@ const [show, setShow] = useState(true);
         </div>
 
         {/**Sign Up Page */}
-        <div className="container mr-0">
+        <div className="container sedan ml-auto mr-auto relative">
           <div
             id="box"
-            className="row ml-48 relative bg-black/50 text-white mt-20 w-[55em] h-[25em]"
+            className="row relative ml-auto mr-auto  bg-black1 text-ashgray mt-20 w-[55em] h-[25em]"
           >
             <div
               className={
@@ -101,12 +140,12 @@ const [show, setShow] = useState(true);
               }
             >
               {show ? (
-                <div className={show && "transition delay-[2000ms]"}>
-                  <h4>Have an account?</h4>
+                <div className="">
+                  <h4 className="text-2xl">Have an account?</h4>
                   <p>Login to Your account</p>
                   <button
                     id="button"
-                    className="btn w-24 shadow-slate-300 shadow-md mt-8 text-white"
+                    className="btn w-24 shadow-slate-300 font-bold uppercase shadow-md bg-magenta1 mt-8 text-papaya"
                     onClick={() => {
                       // setShow(!show)
                       setTimeout(() => setShow(!show), 100);
@@ -116,12 +155,12 @@ const [show, setShow] = useState(true);
                   </button>
                 </div>
               ) : (
-                <div className={!show && "transition delay-[2000ms]"}>
-                  <h4>Don't Have an account?</h4>
+                <div className="">
+                  <h4 className="text-2xl">Don't Have an account?</h4>
                   <p>Sign up here</p>
                   <button
                     id="button"
-                    className="btn w-24 shadow-slate-300 shadow-md mt-8 text-white"
+                    className="btn w-24 shadow-slate-300 bg-papaya font-bold uppercase shadow-md mt-8 text-magenta1"
                     onClick={() => {
                       setTimeout(() => setShow(!show), 100);
                     }}
@@ -135,8 +174,8 @@ const [show, setShow] = useState(true);
               id="formContainer"
               className={
                 show
-                  ? "col-5 h-[28.5em] pt-3 pl-6 bg-white top-[-2em] absolute text-black right-24 translate-x-[-24em] transition-transform  duration-500"
-                  : "col-5 h-[30em] pt-12 pl-6 bg-white top-[-2em] absolute text-black right-24 translate-x-[2em] transition-transform  duration-500"
+                  ? "col-5 h-[28.5em] pt-3 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[-24em] transition-transform  duration-500 "
+                  : "col-5 h-[30em] pt-12 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[2em] transition-transform  duration-500 "
               }
             >
               {show ? (
@@ -144,59 +183,59 @@ const [show, setShow] = useState(true);
                   <h4 className="pb-3 fs-4 font-bold">Sign Up</h4>
                   <form
                     className="flex flex-col"
-                    onSubmit={formik.handleSubmit}
+                    onSubmit={signupformik.handleSubmit}
                   >
                     <div className="relative">
-                      <label className="" name="email">
+                      <label className="font-bold text-black1" name="email">
                         E-mail:
                       </label>
 
                       <br />
                       <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
-                        {formik.errors.email}
+                        {signupformik.errors.email}
                       </div>
                       <input
                         type="email"
                         name="email"
                         className="input h-12 w-[20em]"
                         placeholder="E-mail"
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.email}
                       />
                     </div>
                     <div className="relative mt-1">
-                      <label className="" name="name">
+                      <label className="font-bold text-black1" name="name">
                         Name:
                       </label>
                       <br />
                       <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
-                        {formik.errors.name}
+                        {signupformik.errors.name}
                       </div>
                       <input
                         name="name"
                         type="text"
                         className="input h-12 w-[20em]"
                         placeholder="Name"
-                        onChange={formik.handleChange}
-                        value={formik.values.name}
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.name}
                       />
                     </div>
                     <div className="relative mt-1">
-                      <label className="" name="password">
+                      <label className="font-bold text-black1" name="password">
                         Password
                       </label>
 
                       <br />
                       <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
-                        {formik.errors.password}
+                        {signupformik.errors.password}
                       </div>
                       <input
                         type="text"
                         name="password"
                         className="input h-12 w-[20em]"
                         placeholder="Password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.password}
                       />
                     </div>
                     <div className="mt-1 relative">
@@ -206,16 +245,15 @@ const [show, setShow] = useState(true);
 
                       <br />
                       <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
-                        {formik.errors.confirmpassword}
+                        {signupformik.errors.confirmpassword}
                       </div>
                       <input
                         type="text"
-                        value={formik.values.confirmpassword}
+                        value={signupformik.values.confirmpassword}
                         name="confirmpassword"
                         className="input h-12 w-[20em]"
                         placeholder="Re-type your Password"
-                        onChange={formik.handleChange}
-                       
+                        onChange={signupformik.handleChange}
                       />
                     </div>
                     <button
@@ -229,13 +267,14 @@ const [show, setShow] = useState(true);
                 </>
               ) : (
                 <>
+                  {/* loginPage */}
                   <form
-                    className="flex flex-col"
-                    onSubmit={formik.handleSubmit}
+                    className="flex flex-col "
+                    onSubmit={loginFormik.handleSubmit}
                   >
-                    <h4 className="pb-12">Login</h4>
+                    <h4 className="pb-12 fs-4 font-bold">Login</h4>
                     <div>
-                      <label className="" name="email">
+                      <label className="font-bold text-black1" name="email">
                         E-mail:
                       </label>
 
@@ -245,14 +284,14 @@ const [show, setShow] = useState(true);
                         name="email"
                         className="input h-12 w-[20em]"
                         placeholder="E-mail"
-                        onChange={formik.handleChange}
-                        value={formik.values.email}
+                        onChange={loginFormik.handleChange}
+                        value={loginFormik.values.email}
                       />
-                      <div className="text-red-500">{formik.errors.email}</div>
+                      <div className="text-red-500">{loginFormik.errors.email}</div>
                     </div>
 
                     <div>
-                      <label className="" name="password">
+                      <label className="font-bold text-black1" name="password">
                         Password
                       </label>
 
@@ -262,18 +301,18 @@ const [show, setShow] = useState(true);
                         name="password"
                         className="input h-12 w-[20em]"
                         placeholder="Password"
-                        onChange={formik.handleChange}
-                        value={formik.values.password}
+                        onChange={loginFormik.handleChange}
+                        value={loginFormik.values.password}
                       />
                       <div className="text-red-500">
-                        {formik.errors.password}
+                        {loginFormik.errors.password}
                       </div>
                     </div>
 
                     <button
                       type="submit"
                       className="w-24 mt-6 shadow-sm h-8 bg-black text-white rounded-md"
-                      onClick={handleConfirmPassword}
+                      
                     >
                       Submit
                     </button>
