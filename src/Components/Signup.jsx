@@ -5,7 +5,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import yuppassword from 'yup-password'
-import Cookies from 'js-cookies'
+// import Cookies from 'js-cookies'
+// import {jwtDecode} from 'jwt-decode'
 // import ToastContainer from './ToastContainer';
 
 
@@ -15,7 +16,6 @@ const Signup = ({baseurl, setIsAuthenticated}) => {
     name: '',
     password: '',
   })
-  const [confirmpassword, setConfirmPassword] = useState('')
   const [responseMsg, setResponseMsg] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
 const [show, setShow] = useState(true);
@@ -95,16 +95,12 @@ const [show, setShow] = useState(true);
       try {
         console.log(values);
       const response = await axios.post(`${baseurl}/login`, values)
-      setResponseMsg(response.data.message)
-      // localStorage.setItem('token', response.data.token )
-        Cookies.setItem('token', response.data.token)
-        Cookies.setItem('userId', response.data.userId)
-        setIsAuthenticated(true)
-      successNotify()
-      navigate("/dashboard")
+      // setResponseMsg(response.data.message)
+      console.log(response.data);
   
 } catch (error) {
-        setErrorMsg(error.response.data.message)
+        // setErrorMsg(error.response.data.message)
+        console.log(error.response.data.message);
         errorNotify()
 }
 
