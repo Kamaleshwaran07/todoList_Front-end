@@ -2,7 +2,7 @@ import React from 'react';
 
 const Loader = () => {
     return (
-      <div className='w-32 h-32'>
+      <div className='w-32 h-32 relative mt-[15%] mx-auto'>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="100px"

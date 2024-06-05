@@ -11,11 +11,11 @@ import Dashboard from './Components/Dashboard';
 const App = () => {
   const baseurl = 'http://localhost:8080/api'
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-
+  const [uniLoading, setUniLoading] = useState(false)
   return (
     <>
       <BrowserRouter>
-        <Navbar setIsAuthenticated={setIsAuthenticated} />
+        <Navbar baseurl={baseurl} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} setUniLoading = {setUniLoading} uniLoading = {uniLoading} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
@@ -29,7 +29,7 @@ const App = () => {
           />
           <Route path="/login" element={<Login baseurl={baseurl} />} />
           <Route path="/contactus" element={<Contactus baseurl={baseurl} />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard baseurl={baseurl} uniLoading = {uniLoading} />} />
         </Routes>
       </BrowserRouter>
     </>

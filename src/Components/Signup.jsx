@@ -5,6 +5,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import yuppassword from 'yup-password'
+import Loader from './Loader.jsx'
 // import Cookies from 'js-cookies'
 // import {jwtDecode} from 'jwt-decode'
 // import ToastContainer from './ToastContainer';
@@ -16,8 +17,6 @@ const Signup = ({baseurl, setIsAuthenticated}) => {
     name: '',
     password: '',
   })
-  const [responseMsg, setResponseMsg] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
 const [show, setShow] = useState(true);
   yuppassword(yup)
   const schema = yup.object().shape({
@@ -59,14 +58,10 @@ const [show, setShow] = useState(true);
     onSubmit: async (values) => {
       try {
         const response = await axios.post(`${baseurl}/signup`, values)
-        console.log(values);
-        setResponseMsg(response.data.message)
         data()
-        successNotify()
+        toast.success(response.data.message)
       } catch (error) {
-        setErrorMsg(error.response.data.message)
-       
-        errorNotify()
+        toast.error(error.response.data.message)
       }
     
     }
@@ -93,15 +88,21 @@ const [show, setShow] = useState(true);
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       try {
-        console.log(values);
+        
       const response = await axios.post(`${baseurl}/login`, values)
-      // setResponseMsg(response.data.message)
-      console.log(response.data);
-  
+      setIsAuthenticated(true)
+      toast.success(response.data.message)
+      setIsLoading(true)
+      const token = response.data.token
+      document.cookie = `token = ${token}`
+      setTimeout(() => {
+        setIsLoading(false)
+        navigate("/dashboard");
+      }, 1500);
 } catch (error) {
         // setErrorMsg(error.response.data.message)
-        console.log(error.response.data.message);
-        errorNotify()
+        // console.log(error.response.data.message);
+        toast.error(error.response.data.message)
 }
 
     }
@@ -112,11 +113,18 @@ const [show, setShow] = useState(true);
       toast.error("Password doesn't match")
     }
   }
-  const successNotify = () => toast.success(responseMsg, {icon: '👏'});
-  const errorNotify = () => toast.error(errorMsg)
-
+  const [isLoading, setIsLoading] = useState(false)
   // handleConfirmPassword()
     return (
+      <div>
+      {
+
+        isLoading ?
+        <>
+        <Loader /> 
+
+        </>
+        :
       <div className="row flex-row mr-0">
         <div>
           <Toaster />
@@ -396,7 +404,9 @@ const [show, setShow] = useState(true);
           </div>
         </div> */}
       </div>
-    );
-};
+      }
+      </div>
+    )
+  };
 
 export default Signup;
