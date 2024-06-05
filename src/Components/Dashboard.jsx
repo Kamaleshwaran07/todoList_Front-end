@@ -7,41 +7,72 @@ import tick from "../assets/check.png";
 import axios from "axios";
 import Loader from "./Loader";
 import GetTodo from "./GetTodo";
-import { format, parse } from "date-fns";
+import { format, formatDistance, parse } from "date-fns";
 const Dashboard = ({ uniLoading, baseurl }) => {
   const [title, setTitle] = useState("");
   const [dd, setDD] = useState("");
   const [mm, setMM] = useState("");
   const [yyyy, setYYYY] = useState("");
+  const[hh, setHH] = useState("");
+  const[MM, setmm] = useState("");
   const [name, setName] = useState(null);
   const [userId, setUserId] = useState(null);
-
+  const [data, setData] = useState([])
+// console.log(time);
   useEffect(() => {
     try {
       // Get the cookie
-      const cookie = document.cookie;
 
+      const cookie = document.cookie;
       if (cookie) {
         // Decode the JWT token
         const decoded = jwtDecode(cookie);
         setName(decoded.name);
-        console.log(name);
+        // console.log(name);
         setUserId(decoded.id);
-        console.log(userId);
+        // console.log(userId);
       }
     } catch (error) {
       console.error("Error decoding JWT:", error);
     }
   }, []);
-  {/*Date Comparison for deadline*/}
-  const deadline = `${dd}-${mm}-${yyyy}`
-  const datefns = format(new Date(), 'dd-MM-yyyy')
-  const deadlineDate = parse(deadline, 'dd-MM-yyyy', new Date());
-  const currentDate = parse(datefns, 'dd-MM-yyyy', new Date());
-  const comparison =  currentDate < deadlineDate
-  // console.log(comparison);
 
-  //Handling the form data
+
+
+  {/*Date Comparison for deadline*/}
+  const TodatDate = format(new Date(), 'dd-MM-yyyy')
+  const deadlineDate = `${dd}-${mm}-${yyyy}`
+ // Parse the dates into Date objects for comparison
+const deadline = parse(deadlineDate, 'dd-MM-yyyy', new Date());
+const currentDate = parse(TodatDate, 'dd-MM-yyyy', new Date());
+
+// Compare the dates
+const comparison = currentDate < deadline;
+console.log("Is current date before deadline?", comparison);
+const currentTime = format(new Date(), 'HH-mm')
+console.log(currentTime);
+const deadlineTime = `${hh}-${MM}`
+console.log(deadlineTime);
+const timeComparison = currentTime < deadlineTime
+console.log("Is current time before deadline time?", timeComparison);
+
+  const fetchData = async () => {
+    try {
+        const res = await axios.get(`${baseurl}/gettodo/${userId}`);
+        toast.success(res.data.message);
+        setData(res.data.todo);
+        } catch (error) {
+            toast.error(error.res.data.message);
+            }
+            };
+            
+
+
+            useEffect(() => {
+                fetchData();
+                }, []);
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payloads = {
@@ -49,7 +80,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
       deadline:deadline
     };
     // Return a error if the deadline is in the past
-    if(comparison === false){
+    if(comparison === false || timeComparison === false){
      return toast.error("deadline cannot be in the past")
     }
     
@@ -100,6 +131,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
           ) : (
             <div className={uniLoading ? "hidden" : "visible "}>
               <h1 className="text-end me-3 mt-4">Welcome, {name}!</h1>
+              <button onClick={fetchData}>Fetch Todo</button>
               {/* <img src={notepad} alt="notepad" className="w-[40rem] h-[40rem] bg-[url('../assets/notepad.jpg')]" /> */}
               <form className="" onSubmit={handleSubmit}>
                 <div className="relative flex flex-col gap-2 justify-center container">
@@ -151,6 +183,27 @@ const Dashboard = ({ uniLoading, baseurl }) => {
                       required
                     />
                   </div>
+                  <div>
+                  <input
+                      type="text"
+                      name="hh"
+                      className="w-[3rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
+                      placeholder="hh"
+                      value={hh}
+                      onChange={(e) => setHH(e.target.value)}
+                      maxLength={2}
+                      required
+                    /> <input
+                    type="text"
+                    name="MM"
+                    className="w-[3rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
+                    placeholder="mm"
+                    value={MM}
+                    onChange={(e) => setmm(e.target.value)}
+                    maxLength={2}
+                    required
+                  />
+                  </div>
 
                   <button className="btn w-24" type="submit">
                     <img src={tick} className="w-12" alt="tick" />
@@ -158,7 +211,13 @@ const Dashboard = ({ uniLoading, baseurl }) => {
                 </div>
               </form>
               <div>
-                <GetTodo baseurl={baseurl} userId={userId} />
+                {data.map((item, index)=>{
+                  return(
+                    <div key={index}>
+                      <GetTodo baseurl={baseurl} userId={userId} item = {item} />
+                      </div>
+                  )
+                })}
               </div>
             </div>
           )}
