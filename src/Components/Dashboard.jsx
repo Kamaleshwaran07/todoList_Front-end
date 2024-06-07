@@ -10,15 +10,10 @@ import GetTodo from "./GetTodo";
 import { format, formatDistance, parse } from "date-fns";
 const Dashboard = ({ uniLoading, baseurl }) => {
   const [title, setTitle] = useState("");
-  const [dd, setDD] = useState("");
-  const [mm, setMM] = useState("");
-  const [yyyy, setYYYY] = useState("");
-  const[hh, setHH] = useState("");
-  const[MM, setmm] = useState("");
   const [name, setName] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [data, setData] = useState([])
-// console.log(time);
+  const [data, setData] = useState([]);
+  // console.log(time);
   useEffect(() => {
     try {
       // Get the cookie
@@ -28,66 +23,43 @@ const Dashboard = ({ uniLoading, baseurl }) => {
         // Decode the JWT token
         const decoded = jwtDecode(cookie);
         setName(decoded.name);
-        // console.log(name);
+        console.log(name);
         setUserId(decoded.id);
-        // console.log(userId);
+        console.log(userId);
       }
     } catch (error) {
       console.error("Error decoding JWT:", error);
     }
   }, []);
-
-
-
-  {/*Date Comparison for deadline*/}
-  const TodatDate = format(new Date(), 'dd-MM-yyyy')
-  const deadlineDate = `${dd}-${mm}-${yyyy}`
- // Parse the dates into Date objects for comparison
-const deadline = parse(deadlineDate, 'dd-MM-yyyy', new Date());
-const currentDate = parse(TodatDate, 'dd-MM-yyyy', new Date());
-
-// Compare the dates
-const comparison = currentDate < deadline;
-console.log("Is current date before deadline?", comparison);
-const currentTime = format(new Date(), 'HH-mm')
-console.log(currentTime);
-const deadlineTime = `${hh}-${MM}`
-console.log(deadlineTime);
-const timeComparison = currentTime < deadlineTime
-console.log("Is current time before deadline time?", timeComparison);
+  useEffect(() => {
+    setTimeout(() => {
+      fetchData();
+    }, 1000);
+  }, [userId]);
 
   const fetchData = async () => {
     try {
-        const res = await axios.get(`${baseurl}/gettodo/${userId}`);
-        toast.success(res.data.message);
-        setData(res.data.todo);
-        } catch (error) {
-            toast.error(error.res.data.message);
-            }
-            };
-            
-
-
-            useEffect(() => {
-                fetchData();
-                }, []);
-
+      const res = await axios.get(`${baseurl}/gettodo/${userId}`);
+      toast.success(res.data.message);
+      setData(res.data.todo);
+    } catch (error) {
+      toast.error(error.res.data.message);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payloads = {
       title: title,
-      deadline:deadline
     };
+    console.log(payloads);
     // Return a error if the deadline is in the past
-    if(comparison === false || timeComparison === false){
-     return toast.error("deadline cannot be in the past")
-    }
-    
+
     try {
       const res = await axios.post(`${baseurl}/createtodo`, payloads, {
         withCredentials: true,
       });
+      console.log(res.data);
       toast.success(res.data.message);
     } catch (error) {
       if (error.response) {
@@ -106,7 +78,6 @@ console.log("Is current time before deadline time?", timeComparison);
       // toast.error(error.response.data.message)
     }
   };
-  
 
   return (
     <div>
@@ -129,12 +100,12 @@ console.log("Is current time before deadline time?", timeComparison);
               </div>
             </>
           ) : (
-            <div className={uniLoading ? "hidden" : "visible "}>
+            <div className={uniLoading ? "hidden" : "visible relative"}>
               <h1 className="text-end me-3 mt-4">Welcome, {name}!</h1>
               <button onClick={fetchData}>Fetch Todo</button>
               {/* <img src={notepad} alt="notepad" className="w-[40rem] h-[40rem] bg-[url('../assets/notepad.jpg')]" /> */}
-              <form className="" onSubmit={handleSubmit}>
-                <div className="relative flex flex-col gap-2 justify-center container">
+              <form className="relative ml-[35%] mb-5 mr-0" onSubmit={handleSubmit}>
+                <div className="flex flex-col gap-2 justify-center">
                   <label className="sedan uppercase" name="title">
                     Title
                   </label>
@@ -142,83 +113,30 @@ console.log("Is current time before deadline time?", timeComparison);
                   <input
                     type="text"
                     name="title"
-                    className="w-[30rem] h-16 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
+                    className="w-[30rem] h-16 border-2 bg-yellow-300/80 relative border-ashgray placeholder:text-black1 p-2 shadow-md"
                     placeholder="Take a note...."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                   />
-                  <label className="sedan uppercase" name="">
-                    Deadline
-                  </label>
-                  <div>
-                    <input
-                      type="text"
-                      name="dd"
-                      className="w-[3rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
-                      placeholder="dd"
-                      value={dd}
-                      onChange={(e) => setDD(e.target.value)}
-                      required
-                      maxLength={2}
-                    />
-                    <input
-                      type="text"
-                      name="mm"
-                      className="w-[4rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
-                      placeholder="mm"
-                      value={mm}
-                      onChange={(e) => setMM(e.target.value)}
-                      maxLength={2}
-                      required
-                    />
-                    <input
-                      type="text"
-                      name="yyyy"
-                      className="w-[4rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
-                      placeholder="yyyy"
-                      value={yyyy}
-                      onChange={(e) => setYYYY(e.target.value)}
-                      maxLength={4}
-                      required
-                    />
-                  </div>
-                  <div>
-                  <input
-                      type="text"
-                      name="hh"
-                      className="w-[3rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
-                      placeholder="hh"
-                      value={hh}
-                      onChange={(e) => setHH(e.target.value)}
-                      maxLength={2}
-                      required
-                    /> <input
-                    type="text"
-                    name="MM"
-                    className="w-[3rem] h-12 border-2 bg-yellow-300/80 border-ashgray placeholder:text-black1 p-2 shadow-md"
-                    placeholder="mm"
-                    value={MM}
-                    onChange={(e) => setmm(e.target.value)}
-                    maxLength={2}
-                    required
-                  />
-                  </div>
 
-                  <button className="btn w-24" type="submit">
+                  <button className="btn absolute top-8 right-[29em] w-24" type="submit">
                     <img src={tick} className="w-12" alt="tick" />
                   </button>
                 </div>
               </form>
-              <div>
-                {data.map((item, index)=>{
-                  return(
-                    <div key={index}>
-                      <GetTodo baseurl={baseurl} userId={userId} item = {item} />
-                      </div>
-                  )
-                })}
+              <section className="relative mt-6">
+
+              <div className="flex flex-col-reverse absolute left-[40%] mt-12">
+                {data.map((item, index) => {
+                  return (
+                    <div className="flex flex-col-reverse" key={index}>
+                      <GetTodo baseurl={baseurl} userId={userId} item={item} />
+                    </div>
+                  );
+                  })}
               </div>
+                </section>
             </div>
           )}
         </>

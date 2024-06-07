@@ -5,35 +5,83 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const GetTodo = ({ baseurl, userId, item }) => {
-  let deadlineDate = JSON.stringify(item.deadline)
-deadlineDate = deadlineDate.slice(1,11)
+  const [isEditing, setIsEditing] = useState(false);
+  const [status, setStatus] = useState("");
+  const [title, setTitle] = useState("");
+  const [todoId, setTodoId] = useState("");
 
-function dateConverter(str){
-  var date = new Date(str),
-  mnth = ("0" + (date.getMonth()+1)).slice(-2),
-  day  = ("0" + date.getDate()).slice(-2);
-  var hours  = ("0" + date.getHours()).slice(-2);
-  var minutes = ("0" + date.getMinutes()).slice(-2);
-  var year = date.getFullYear();
-  return `${day}/${mnth}/${year}, Time: ${hours}:${minutes}`
-}
+  console.log(todoId);
 
-  const comparison = formatDistance(item.createdAt, item.deadline)
-  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let payloads = {
+      title: title,
+      status: status,
+    };
+    console.log(payloads);
+    try {
+      const res = await axios.put(`${baseurl}/edittodo/${todoId}`, payloads, {
+        withCredentials: true,
+      });
+      toast.success(res.data.message);
+      setIsEditing(false);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
-    <div>
+    <div
+      className="flex flex-row"
+      onDoubleClick={() => {
+        setIsEditing(true);
+        setTodoId(item._id);
+      }}
+    >
       <div>
+        {isEditing ? (
+          <form onSubmit={handleSubmit}>
+            <input
+              name="title"
+              placeholder={item.title}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              className="w-48 h-12"
+            />
+            <select
+              value={status}
+              name="status"
+              onChange={(e) => setStatus(e.target.value)}
+              className={isEditing ? "visible" : "hidden"}
+              id=""
+            >
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+            </select>
+            <button type="submit">Submit</button>
+          </form>
+        ) : (
+          <div className="">
+            <div
+              className={
+                item.status === "completed" ? " text-gray-500 flex line-through list-none" : "text-2xl text-re list-none"
 
-      {item.title}
+              }
+            >
+              <li className="me-3">
+
+              {item.title}
+              </li>
+              <li>
+
+              {item.status}
+              </li>
+            </div>
+          </div>
+        )}
       </div>
-      <div>
-        Created On: {dateConverter(item.createdAt)}
-      </div>
-      <div>
-        Deadline: {dateConverter(item.deadline)}
-      </div>
-      <div>Your todo Deadline : {comparison}</div>
-     </div>
+    </div>
   );
 };
 export default GetTodo;
