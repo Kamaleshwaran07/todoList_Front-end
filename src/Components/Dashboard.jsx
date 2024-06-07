@@ -61,6 +61,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
       });
       console.log(res.data);
       toast.success(res.data.message);
+      fetchData()
     } catch (error) {
       if (error.response) {
         // Server responded with a status other than 200 range
@@ -131,7 +132,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
                 {data.map((item, index) => {
                   return (
                     <div className="flex flex-col-reverse" key={index}>
-                      <GetTodo baseurl={baseurl} userId={userId} item={item} />
+                      <GetTodo baseurl={baseurl} userId={userId} item={item} fetchData= {fetchData} />
                     </div>
                   );
                   })}
