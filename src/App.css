@@ -112,9 +112,19 @@ a {
   content: "";
   width: 5px;
   height: 14em;
-  left: 30.25em;
+  left: 15.25em;
   position: absolute;
   background-color: #f62f61;
+}
+@media screen and  (max-width:768px){
+  .hero2::after{
+    left: 15em;
+  }
+}
+@media screen and  (min-width:1440px){
+  .hero2::after{
+    left: 30.5em;
+  }
 }
 .carousel-item{
   
@@ -141,6 +151,11 @@ a {
   transform: scale(1.05);
   box-shadow: 13px 13px 100px #969696,
              -13px -13px 100px #ffffff;
+}
+@media screen and (max-width: 768px) {
+  .input{
+    background-color: #cccccc78;
+  }
 }
 /* .carousel-item{
   transition: 1000ms;
@@ -349,7 +364,7 @@ a {
   font-style: normal;
 }
 
-.sedan-italic {
+.sedanItalic {
   font-family: "Sedan", serif;
   font-weight: 400;
   font-style: italic;

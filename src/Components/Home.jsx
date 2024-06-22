@@ -16,7 +16,7 @@ const Home = () => {
       <div className='sedan'>
         {/* Hero Section */}
         <div className="grid grid-cols-3 hero gap-4">
-          <div className="heroHead absolute mt-56 ml-20 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[30rem]">
+          <div className="heroHead relative mt-56 ml-20 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[30rem]">
             <h3 className="text-3xl uppercase font-bold text-">Todoloo</h3>
             <p className="text-xl mt-6 text-slate-100">
               Welcome to our Todo list site! Stay organized, productive, and
@@ -26,7 +26,7 @@ const Home = () => {
         </div>
         {/*Our Story */}
         <div className="bg-[#1e1e1e] h-[30em] pt-36 text-white">
-          <div className="flex hero2 ms-[25em]">
+          <div className="flex hero2 xl:ms-[25em] md:ms-[10em]">
             <h4 className="text-3xl">
               Our
               <br /> Story
@@ -53,7 +53,7 @@ const Home = () => {
           data-bs-ride="carousel"
         >
           <div class="carousel-inner pt-24 relative mx-auto my-auto flex justify-center">
-            <div class="carousel-item w-[40em] active mr-[-10%]">
+            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] active mr-[-10%]">
               <div className="flex items-center justify-center">
                 <img
                   src={woman}
@@ -71,7 +71,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="carousel-item w-[40em] mr-[-10%]">
+            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] mr-[-10%]">
               <div className="flex items-center justify-center">
                 <img src={man} class="rounded-full w-32 h-32 me-3" alt="..." />
                 <div>
@@ -85,7 +85,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="carousel-item w-[40em] mr-[-10%]">
+            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] mr-[-10%]">
               <div className="flex items-center justify-center">
                 <img
                   src={woman3}
@@ -142,8 +142,8 @@ const Home = () => {
         {/*Contact Us*/}
         <div className="relative container-fluid text-white bg-black1">
           <div className="flex p-6 ml-6">
-            <img src={desktop} alt="" className="w-[35em] rounded-lg" />
-            <div className="absolute right-[8em]">
+            <img src={desktop} alt="" className="w-[35em] lg:h-[40em] lg:w-[30em] md:w-[40em] rounded-lg" />
+            <div className="absolute lg:right-5  right-[8em] md:right-[10em]">
               <h3 className="text-[3.2em] font-bold">Get in touch with us</h3>
               <p className="text-md font-normal mt-3">
                 Feel free to reach out for more information.
@@ -159,17 +159,17 @@ const Home = () => {
                 </span>
               </div>
               <form className="flex flex-col mt-3">
-                <label className="" name="name">
+                <label className="text-xl" name="name">
                   Name
                 </label>
                 <input
                   type="text"
                   autocomplete="off"
                   name="name"
-                  class="input h-12"
+                  class="input h-12 placeholder:text-magenta1 placeholder:italic"
                   placeholder="Name"
                 />
-                <label className="" name="email">
+                <label className="text-xl" name="email">
                   Your email here
                 </label>
 
@@ -177,21 +177,21 @@ const Home = () => {
                   type="email"
                   autocomplete="off"
                   name="email"
-                  class="input h-12"
+                  class="input h-12 placeholder:text-magenta1 placeholder:italic"
                   placeholder="E-mail"
                 />
-                <label className="" name="email">
+                <label className="text-xl" name="email">
                   Message
                 </label>
                 <textarea
                   type="text"
                   name="message"
-                  class="input h-48"
+                  class="input h-48 placeholder:text-magenta1 placeholder:italic"
                   placeholder="Type in your message"
                 ></textarea>
                 <button
                   type="submit"
-                  className="border-lg border-1 w-36 p-2 bg-red1 text-white rounded-lg mt-3"
+                  className="border-lg border-1 w-36 p-2 md:bg-papaya font-bold uppercase md:text-black1 rounded-lg mt-3"
                 >
                   Send message
                 </button>

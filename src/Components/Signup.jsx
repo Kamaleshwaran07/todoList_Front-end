@@ -135,13 +135,13 @@ const [show, setShow] = useState(true);
         <div className="container sedan ml-auto mr-auto relative">
           <div
             id="box"
-            className="row relative ml-auto mr-auto  bg-black1 text-ashgray mt-20 w-[55em] h-[25em]"
+            className="row relative ml-auto mr-auto  bg-black1 text-ashgray mt-20 w-[55em] h-[25em] md:w-[40em]"
           >
             <div
               className={
                 show
-                  ? "col-4 mt-32 pl-12 translate-x-[32rem]  transition-transform  duration-500"
-                  : "col-5 mt-32 pl-32 translate-x-[-2rem]  transition-transform  duration-500"
+                  ? "col-4 mt-32 pl-12 md:pl-6 md:translate-x-[24em] translate-x-[32rem]  transition-transform  duration-500"
+                  : "col-6 md:pl-16 mt-32 pl-32 translate-x-[-2rem]  transition-transform  duration-500"
               }
             >
               {show ? (
@@ -165,7 +165,7 @@ const [show, setShow] = useState(true);
                   <p>Sign up here</p>
                   <button
                     id="button"
-                    className="btn w-24 shadow-slate-300 bg-papaya font-bold uppercase shadow-md mt-8 text-magenta1"
+                    className="btn w-24 shadow-slate-300 bg-papaya font-bold uppercase shadow-md mt-8 text-magenta1 md:text-magenta1 md:bg-papaya"
                     onClick={() => {
                       setTimeout(() => setShow(!show), 100);
                     }}
@@ -179,8 +179,8 @@ const [show, setShow] = useState(true);
               id="formContainer"
               className={
                 show
-                  ? "col-5 h-[28.5em] pt-3 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[-24em] transition-transform  duration-500 "
-                  : "col-5 h-[30em] pt-12 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[2em] transition-transform  duration-500 "
+                  ? "col-5 h-[28.5em] col-md-6 md:translate-x-[-12em] pt-3 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[-24em] transition-transform  duration-500 "
+                  : "col-5 h-[30em] md:h-[29em] col-md-6 md:translate-x-[3em] pt-12 pl-6 bg-papaya top-[-2em] absolute text-black right-24 translate-x-[2em] transition-transform  duration-500 "
               }
             >
               {show ? (
@@ -202,7 +202,7 @@ const [show, setShow] = useState(true);
                       <input
                         type="email"
                         name="email"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 md:w-[17em] w-[20em]"
                         placeholder="E-mail"
                         onChange={signupformik.handleChange}
                         value={signupformik.values.email}
@@ -219,7 +219,7 @@ const [show, setShow] = useState(true);
                       <input
                         name="name"
                         type="text"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 md:w-[17em] w-[20em]"
                         placeholder="Name"
                         onChange={signupformik.handleChange}
                         value={signupformik.values.name}
@@ -237,7 +237,7 @@ const [show, setShow] = useState(true);
                       <input
                         type="text"
                         name="password"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 md:w-[17em] w-[20em]"
                         placeholder="Password"
                         onChange={signupformik.handleChange}
                         value={signupformik.values.password}
@@ -256,14 +256,14 @@ const [show, setShow] = useState(true);
                         type="text"
                         value={signupformik.values.confirmpassword}
                         name="confirmpassword"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 w-[20em] md:w-[17em]"
                         placeholder="Re-type your Password"
                         onChange={signupformik.handleChange}
                       />
                     </div>
                     <button
                       type="submit"
-                      className="w-24 mt-4  shadow-sm h-8 bg-black text-white rounded-md relative left-52"
+                      className="w-24 mt-4 md:left-1 shadow-sm h-8 bg-black text-white rounded-md relative left-52"
                       onClick={handleConfirmPassword}
                     >
                       Submit
@@ -287,7 +287,7 @@ const [show, setShow] = useState(true);
                       <input
                         type="email"
                         name="email"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 w-[20em] md:w-[17em]"
                         placeholder="E-mail"
                         onChange={loginFormik.handleChange}
                         value={loginFormik.values.email}
@@ -304,7 +304,7 @@ const [show, setShow] = useState(true);
                       <input
                         type="password"
                         name="password"
-                        className="input h-12 w-[20em]"
+                        className="input h-12 w-[20em] md:w-[17em]"
                         placeholder="Password"
                         onChange={loginFormik.handleChange}
                         value={loginFormik.values.password}
