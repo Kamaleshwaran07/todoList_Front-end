@@ -31,11 +31,11 @@ const Dashboard = ({ uniLoading, baseurl }) => {
       console.error("Error decoding JWT:", error);
     }
   }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      fetchData();
-    }, 1000);
-  }, [userId]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     fetchData();
+  //   }, 1500);
+  // }, [userId]);
 
   const fetchData = async () => {
     try {
@@ -61,6 +61,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
       });
       console.log(res.data);
       toast.success(res.data.message);
+      setTitle("")
       fetchData()
     } catch (error) {
       if (error.response) {
@@ -103,7 +104,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
           ) : (
             <div className={uniLoading ? "hidden" : "visible relative"}>
               <h1 className="text-end me-3 mt-4">Welcome, {name}!</h1>
-              <button onClick={fetchData}>Fetch Todo</button>
+              <button type="button" onClick={fetchData} className=" me-5 top-0 left-12 absolute border-2 border-orange-500 p-1 rounded-xl">Fetch Todo</button>
               {/* <img src={notepad} alt="notepad" className="w-[40rem] h-[40rem] bg-[url('../assets/notepad.jpg')]" /> */}
               <form className="relative ml-[35%] mb-5 mr-0" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-2 justify-center">

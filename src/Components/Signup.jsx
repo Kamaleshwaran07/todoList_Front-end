@@ -141,7 +141,7 @@ const [show, setShow] = useState(true);
               className={
                 show
                   ? "col-4 mt-32 pl-12 md:pl-6 md:translate-x-[24em] translate-x-[32rem]  transition-transform  duration-500"
-                  : "col-6 md:pl-16 mt-32 pl-32 translate-x-[-2rem]  transition-transform  duration-500"
+                  : "col-6 md:pl-16 xl:pl-24 mt-32 pl-32 translate-x-[-2rem]  transition-transform  duration-500"
               }
             >
               {show ? (

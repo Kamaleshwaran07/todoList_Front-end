@@ -142,8 +142,8 @@ const Home = () => {
         {/*Contact Us*/}
         <div className="relative container-fluid text-white bg-black1">
           <div className="flex p-6 ml-6">
-            <img src={desktop} alt="" className="w-[35em] lg:h-[40em] lg:w-[30em] md:w-[40em] rounded-lg" />
-            <div className="absolute lg:right-5  right-[8em] md:right-[10em]">
+            <img src={desktop} alt="" className="w-[35em] xl:w-[40em] lg:h-[40em] lg:w-[30em] md:w-[40em] rounded-lg" />
+            <div className="absolute lg:right-5 xl:right-[12em]  right-[8em] md:right-[10em]">
               <h3 className="text-[3.2em] font-bold">Get in touch with us</h3>
               <p className="text-md font-normal mt-3">
                 Feel free to reach out for more information.

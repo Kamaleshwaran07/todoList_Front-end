@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import trash from "../assets/delete.png"
+import tick from "../assets/check.png";
 
 const GetTodo = ({ baseurl, userId, item, fetchData }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -14,8 +15,8 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let payloads = {
-      title: title,
-      status: status,
+      title: title || item.title,
+      status: status || item.status,
     };
     console.log(payloads);
     try {
@@ -59,23 +60,14 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
               required
               className="w-48 h-12"
             />
-            <select
-              value={status}
-              name="status"
-              onChange={(e) => setStatus(e.target.value)}
-              className={isEditing ? "visible" : "hidden"}
-              id=""
-            >
-              <option value="pending">Pending</option>
-              <option value="completed">Completed</option>
-            </select>
+           
             <button type="submit">Submit</button>
           </form>
         ) : (
           <div className="">
             <div
               className={
-                item.status === "completed" ? " text-gray-500 text-xl items-center flex line-through list-none" : "text-2xl flex items-center uppercase text-re list-none"
+                item.status === "completed" ? " text-gray-500 text-xl items-center flex line-through list-none" : "text-2xl flex items-center list-none"
 
               }
             >
@@ -83,10 +75,18 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
 
               {item.title}
               </li>
-              <li className="me-3">
+              <li className="me-3 uppercase text-lg">
 
-              {item.status}
-              </li>
+{item.status}
+</li>
+              <form onSubmit={handleSubmit}>
+
+          
+            <button onClick={()=>{
+              setTodoId(item._id)
+              setStatus("completed")
+            }} type="submit"><img src={tick} alt="" className={item.status === "completed" ? "hidden" : "w-6 me-3 mt-2"} /></button>
+            </form>
               <button type="button" onClick={()=> 
               {
                 setTodoId(item._id)
