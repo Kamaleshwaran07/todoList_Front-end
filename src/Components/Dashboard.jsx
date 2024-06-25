@@ -82,7 +82,7 @@ const Dashboard = ({ uniLoading, baseurl }) => {
   };
 
   return (
-    <div>
+    <div className="bg-papaya h-[93vh]">
       {uniLoading ? (
         <Loader />
       ) : (
@@ -102,37 +102,40 @@ const Dashboard = ({ uniLoading, baseurl }) => {
               </div>
             </>
           ) : (
-            <div className={uniLoading ? "hidden" : "visible relative"}>
-              <h1 className="text-end me-3 mt-4">Welcome, {name}!</h1>
-              <button type="button" onClick={fetchData} className=" me-5 top-0 left-12 absolute border-2 border-orange-500 p-1 rounded-xl">Fetch Todo</button>
+            <div className={uniLoading ? "hidden" : "visible relative container-md"}>
+              <div className="flex flex-row items-center  pt-4">
+
+              <h1 className="ms-3">Welcome, {name}!</h1>
+              <button type="button" onClick={fetchData} className=" ms-auto me-3 border-2 border-orange-500 p-1 rounded-xl">Fetch Todo</button>
+              </div>
               {/* <img src={notepad} alt="notepad" className="w-[40rem] h-[40rem] bg-[url('../assets/notepad.jpg')]" /> */}
-              <form className="relative ml-[35%] mb-5 mr-0" onSubmit={handleSubmit}>
-                <div className="flex flex-col gap-2 justify-center">
-                  <label className="sedan uppercase" name="title">
+              <form className="relative md:mt-6 ml-4 mb-5 mr-0" onSubmit={handleSubmit}>
+                <div className="flex flex-col gap-2 md:items-center">
+                  <label className="sedan uppercase -ms-[20rem]" name="title">
                     Title
                   </label>
 
                   <input
                     type="text"
                     name="title"
-                    className="w-[30rem] h-16 border-2 bg-yellow-300/80 relative border-ashgray placeholder:text-black1 p-2 shadow-md"
+                    className="w-96 h-16 border-2 bg-yellow-300/80 relative border-ashgray placeholder:text-black1 p-2 shadow-md"
                     placeholder="Take a note...."
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                   />
 
-                  <button className="btn absolute top-8 right-[29em] w-24" type="submit">
+                  <button className="btn absolute top-8 right-0 md:right-32 xl:right-[29em] w-24" type="submit">
                     <img src={tick} className="w-12" alt="tick" />
                   </button>
                 </div>
               </form>
-              <section className="relative mt-6">
+              <section className="relative container-md  bg-papaya mt-6">
 
-              <div className="flex flex-col-reverse absolute left-[40%] mt-12">
+              <div className="flex flex-col-reverse justify-center items-center mt-12">
                 {data.map((item, index) => {
                   return (
-                    <div className="flex flex-col-reverse" key={index}>
+                    <div className="flex flex-col-reverse " key={index}>
                       <GetTodo baseurl={baseurl} userId={userId} item={item} fetchData= {fetchData} />
                     </div>
                   );

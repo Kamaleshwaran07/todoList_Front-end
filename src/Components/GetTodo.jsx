@@ -44,10 +44,7 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
   return (
     <div
       className="flex flex-row"
-      onDoubleClick={() => {
-        setIsEditing(true);
-        setTodoId(item._id);
-      }}
+      
     >
       <div>
         {isEditing ? (
@@ -58,7 +55,7 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-48 h-12"
+              className="w-48 h-12 me-3 rounded px-2"
             />
            
             <button type="submit">Submit</button>
@@ -67,15 +64,18 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
           <div className="">
             <div
               className={
-                item.status === "completed" ? " text-gray-500 text-xl items-center flex line-through list-none" : "text-2xl flex items-center list-none"
+                item.status === "completed" ? " text-gray-500 text-xl pb-2 items-center justify-center flex line-through list-none" : "text-2xl flex items-center justify-center pb-2 list-none"
 
               }
             >
-              <li className="me-3">
+              <li className="me-3" onClick={() => {
+        setIsEditing(true);
+        setTodoId(item._id);
+      }}>
 
               {item.title}
               </li>
-              <li className="me-3 uppercase text-lg">
+              <li className="uppercase me-3 text-[1rem]">
 
 {item.status}
 </li>
@@ -85,7 +85,7 @@ const GetTodo = ({ baseurl, userId, item, fetchData }) => {
             <button onClick={()=>{
               setTodoId(item._id)
               setStatus("completed")
-            }} type="submit"><img src={tick} alt="" className={item.status === "completed" ? "hidden" : "w-6 me-3 mt-2"} /></button>
+            }} type="submit"><img src={tick} alt="" className={item.status === "completed" ? "hidden" : "w-6 me-3"} /></button>
             </form>
               <button type="button" onClick={()=> 
               {
