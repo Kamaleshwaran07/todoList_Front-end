@@ -13,11 +13,14 @@
     height:35px;
     width: 120px;
 }
-@media not all and (min-width:1280px) {
+@media not all and (min-width:769px) {
   .list{
     border-radius: 15px 15px 15px 15px;
+    background-color: black;
+    box-shadow: -3px 0px 10px rgba(255, 255, 255, 0.651);
   }
 }
+
 .list, .list:after, .list:before{
     /* box-sizing: border-box; */
     display: inline-block;
@@ -157,9 +160,33 @@ a {
   box-shadow: 13px 13px 100px #969696,
              -13px -13px 100px #ffffff;
 }
+@media screen and (max-width: 426px) {
+  .input{
+    box-shadow: inset 2px 5px 10px rgba(252, 252, 252, 0.3);
+    background-color: #fffefe;
+  }
+}
+@media screen and (min-width: 1440px) {
+  .input{
+    box-shadow: inset 2px 5px 10px rgba(230, 230, 230, 0.521);
+    background-color: #000000;
+  }
+}
 @media screen and (max-width: 768px) {
   .input{
-    background-color: #cccccc78;
+    color: rgb(0, 0, 0);
+    box-shadow: inset 2px 5px 10px rgba(0, 0, 0, 0.562);
+
+    background-color: #02020278;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .input{
+    color: rgb(0, 0, 0);
+    box-shadow: inset 2px 5px 10px rgba(190, 190, 190, 0.562);
+
+    background-color: #02020278;
   }
 }
 /* .carousel-item{

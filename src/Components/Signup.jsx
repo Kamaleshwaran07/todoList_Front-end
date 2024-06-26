@@ -115,8 +115,19 @@ const [show, setShow] = useState(true);
     }
   }
   const [isLoading, setIsLoading] = useState(false)
-  // handleConfirmPassword()
-    return (
+  const [showLogin, setShowLogin] = useState(false)
+  const [showSignin, setShowsignin] = useState(true)
+  const handleLogin = () =>{
+   setShowLogin(true) // handleConfirmPassword()
+  setShowsignin(false)
+  
+  }
+  const handleSignin = () =>{
+    setShowLogin(false) // handleConfirmPassword()
+   setShowsignin(true)
+   
+   }
+   return (
       <div>
       {
 
@@ -132,7 +143,7 @@ const [show, setShow] = useState(true);
         </div>
 
         {/**Sign Up Page */}
-        <div className="container sedan ml-auto mr-auto relative">
+        <div className="container max-sm:hidden sedan ml-auto mr-auto relative">
           <div
             id="box"
             className="row relative ml-auto mr-auto  bg-black1 text-ashgray mt-20 w-[55em] h-[25em] md:w-[40em]"
@@ -328,82 +339,142 @@ const [show, setShow] = useState(true);
           </div>
         </div>
 
-        {/*Login Page */}
-        {/* <div className={!show && "container col-6"}>
-          <div
-            id="box"
-            className="row ml-24 relative bg-black text-white mt-20 w-[60em] h-[25em]"
-          >
-            <div
-              className={
-                !show
-                && "col-4 mt-32 pl-20 translate-x-[2rem] transition-transform delay-300 duration-1000"
-              }
-            >
-              <h4>Don't Have an account?</h4>
-              <p>Sign up here</p>
-              <button
-                id="button"
-                className="btn w-24 shadow-slate-300 shadow-md mt-8 text-white"
-                onClick={() => setShow(!show)}
-              >
-                Sign Up
-              </button>
-            </div>
-            <div
-              id="formContainer"
-              className={
-                !show
-                 && "col-5 h-[30em] p-10 bg-white top-[-2em] absolute text-black right-24 translate-x-[1em] transition-transform delay-300 duration-1000"
-              }
-            >
-              <form className="flex flex-col" onSubmit={formik.handleSubmit}>
-                <h4>Login</h4>
-                <div>
-                  <label className="" name="email">
-                    E-mail:
-                  </label>
+       <div className='bg-papaya sm:hidden h-[38em]'> 
+                  <form
+                    className={showSignin ? "flex items-center flex-col" : "hidden"}
+                    onSubmit={signupformik.handleSubmit}
+                  >
+                    <h4 className="pb-3 mt-4 text-center fs-4 font-bold">Sign Up</h4>
+                    <div className="relative">
+                      <label className="font-bold text-black1" name="email">
+                        E-mail:
+                      </label>
 
-                  <br />
-                  <input
-                    type="email"
-                    name="email"
-                    className="input h-12 w-[20em]"
-                    placeholder="E-mail"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                  />
-                  <div className="text-red-500">{formik.errors.email}</div>
-                </div>
+                      <br />
+                      <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
+                        {signupformik.errors.email}
+                      </div>
+                      <input
+                        type="email"
+                        name="email"
+                        className="input h-12 placeholder:text-black1 md:w-[17em] w-[20em]"
+                        placeholder="E-mail"
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.email}
+                      />
+                    </div>
+                    <div className="relative mt-1">
+                      <label className="font-bold text-black1" name="name">
+                        Name:
+                      </label>
+                      <br />
+                      <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
+                        {signupformik.errors.name}
+                      </div>
+                      <input
+                        name="name"
+                        type="text"
+                        className="input h-12 placeholder:text-black1 md:w-[17em] w-[20em]"
+                        placeholder="Name"
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.name}
+                      />
+                    </div>
+                    <div className="relative mt-1">
+                      <label className="font-bold text-black1" name="password">
+                        Password:
+                      </label>
 
-                <div>
-                  <label className="" name="password">
-                    Password
-                  </label>
+                      <br />
+                      <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
+                        {signupformik.errors.password}
+                      </div>
+                      <input
+                        type="text"
+                        name="password"
+                        className="input h-12 placeholder:text-black1 md:w-[17em] w-[20em]"
+                        placeholder="Password"
+                        onChange={signupformik.handleChange}
+                        value={signupformik.values.password}
+                      />
+                    </div>
+                    <div className="mt-1 relative">
+                      <label className="font-bold text-black1" name="confirmpassword">
+                        Confirm your Password:
+                      </label>
 
-                  <br />
-                  <input
-                    type="password"
-                    name="password"
-                    className="input h-12 w-[20em]"
-                    placeholder="Password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                  />
-                  <div className="text-red-500">{formik.errors.password}</div>
-                </div>
+                      <br />
+                      <div className="text-red-500 float-right absolute right-0 top-0 font-bold italic">
+                        {signupformik.errors.confirmpassword}
+                      </div>
+                      <input
+                        type="text"
+                        value={signupformik.values.confirmpassword}
+                        name="confirmpassword"
+                        className="input h-12 placeholder:text-black1 w-[20em] md:w-[17em]"
+                        placeholder="Re-type your Password"
+                        onChange={signupformik.handleChange}
+                      />
+                    </div>
+                    <div className='flex -ml-12 mt-2'>Already have an account? <p className='underline italic ms-1 text-orange1 font-semibold' onClick={handleLogin}>Click here</p></div>
+                    <button
+                      type="submit"
+                      className="w-24 mt-4 mx-auto shadow-sm h-8 bg-black text-white rounded-md relative"
+                      onClick={handleConfirmPassword}
+                    >
+                      Sign in
+                    </button>
+                  </form>
+                  <form
+                    className={showLogin ? "flex flex-col h-[80vh] justify-center items-center" : "hidden"}
+                    onSubmit={loginFormik.handleSubmit}
+                  >
+                    <h4 className="fs-4  font-bold">Login</h4>
+                    <div>
+                      <label className="font-bold text-black1" name="email">
+                        E-mail:
+                      </label>
 
-                <button
-                  type="submit"
-                  className="w-24"
-                  onClick={handleConfirmPassword}
-                >
-                  Submit
-                </button>
-              </form>
-            </div>
-          </div>
-        </div> */}
+                      <br />
+                      <input
+                        type="email"
+                        name="email"
+                        className="input h-12 w-[20em] md:w-[17em]"
+                        placeholder="E-mail"
+                        onChange={loginFormik.handleChange}
+                        value={loginFormik.values.email}
+                      />
+                      <div className="text-red-500">{loginFormik.errors.email}</div>
+                    </div>
+
+                    <div>
+                      <label className="font-bold text-black1" name="password">
+                        Password
+                      </label>
+
+                      <br />
+                      <input
+                        type="password"
+                        name="password"
+                        className="input h-12 w-[20em] md:w-[17em]"
+                        placeholder="Password"
+                        onChange={loginFormik.handleChange}
+                        value={loginFormik.values.password}
+                      />
+                      <div className="text-red-500">
+                        {loginFormik.errors.password}
+                      </div>
+                    </div>
+                    <div className='flex -ml-12 mt-2'>Don't have an account? <p className='underline italic ms-1 text-orange1 font-semibold' onClick={handleSignin}>Click here</p></div>
+                    <button
+                      type="submit"
+                      className="w-24 mt-6 shadow-sm h-8 bg-black text-white rounded-md"
+                      
+                    >
+                     Login
+                    </button>
+                  </form>
+                  </div>
       </div>
       }
       </div>
