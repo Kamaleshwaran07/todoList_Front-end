@@ -120,20 +120,36 @@ a {
   content: "";
   width: 5px;
   height: 14em;
-  left: 15.25em;
+
+  
   position: absolute;
   background-color: #f62f61;
 }
-@media screen and  (max-width:768px){
+@media screen and  (min-width:768px){
   .hero2::after{
-    left: 15em;
+    left: 13.8em;
   }
 }
-@media screen and  (min-width:1440px){
+@media only screen and  (max-width:600px){
+  .hero2::after{
+    left: 6.8em;
+  }
+}
+@media screen and  (min-width:1024px){
+  .hero2::after{
+    left: 20.9em;
+  }
+}
+@media screen and  (min-width: 1281px){
+  .hero2::after{
+    left: 30.9em;
+  }
+}
+/* @media screen and  (min-width:1440px){
   .hero2::after{
     left: 30.5em;
   }
-}
+} */
 .carousel-item{
   
   position: relative;

@@ -16,7 +16,7 @@ const Home = () => {
       <div className='sedan'>
         {/* Hero Section */}
         <div className="grid grid-cols-3 hero gap-4">
-          <div className="heroHead relative mt-56 ml-20 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[30rem]">
+          <div className="heroHead relative mt-48 ml-2 md:ml-12 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[25rem]">
             <h3 className="text-3xl uppercase font-bold text-">Todoloo</h3>
             <p className="text-xl mt-6 text-slate-100">
               Welcome to our Todo list site! Stay organized, productive, and
@@ -25,13 +25,13 @@ const Home = () => {
           </div>
         </div>
         {/*Our Story */}
-        <div className="bg-[#1e1e1e] h-[30em] pt-36 text-white">
-          <div className="flex hero2 xl:ms-[25em] md:ms-[10em]">
+        <div className="bg-[#1e1e1e] h-[30em] pl-3 pt-12 lg:pt-24 md:pt-24 text-white">
+          <div className="flex hero2 xl:ms-[25em] md:ml-[8em] lg:ml-[15em] ml-3">
             <h4 className="text-3xl">
               Our
               <br /> Story
             </h4>
-            <div className="w-[40em] ms-12">
+            <div className="w-[18em] md:w-[25em] lg:w-[30em] ms-8">
               <h3 className="text-2xl">TodoLoo</h3>
               <p className="text-md font-normal mt-6 text-slate-300">
                 TodoLoo isn't just a typical todo list website, it's a hub of
@@ -52,9 +52,9 @@ const Home = () => {
           class="carousel slid  h-[20em] relative mx-auto bg-black text-papaya"
           data-bs-ride="carousel"
         >
-          <div class="carousel-inner pt-24 relative mx-auto my-auto flex justify-center">
-            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] active mr-[-10%]">
-              <div className="flex items-center justify-center">
+          <div class="carousel-inner pt-6 relative mx-auto my-auto flex justify-center">
+            <div class="carousel-item w-[20em] xl:w-[40em] md:w-[25em] active mr-[-10%]">
+              <div className="flex flex-col items-center justify-center">
                 <img
                   src={woman}
                   class="rounded-full w-32 h-32 me-3"
@@ -71,8 +71,8 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] mr-[-10%]">
-              <div className="flex items-center justify-center">
+            <div class="carousel-item w-[20em] xl:w-[40em] md:w-[25em] mr-[-10%]">
+              <div className="flex items-center flex-col justify-center">
                 <img src={man} class="rounded-full w-32 h-32 me-3" alt="..." />
                 <div>
                   <h1 className="text-magenta1 font-bold text-xl">Lucas Evans</h1>
@@ -85,11 +85,11 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div class="carousel-item w-[40em] xl:w-[40em] md:w-[25em] mr-[-10%]">
-              <div className="flex items-center justify-center">
+            <div class="carousel-item w-[20em] xl:w-[40em] md:w-[25em] mr-[-10%]">
+              <div className="flex items-center flex-col justify-center">
                 <img
                   src={woman3}
-                  class="rounded-full w-48 h-32 me-3"
+                  class="rounded-full w-32 h-32 me-3"
                   alt="..."
                 />
                 <div>
@@ -140,36 +140,36 @@ const Home = () => {
           Your path to organized task management and increased productivity
         </div>
         {/*Contact Us*/}
-        <div className="relative container-fluid text-white bg-black1">
-          <div className="flex p-6 ml-6">
-            <img src={desktop} alt="" className="w-[35em] xl:w-[40em] lg:h-[40em] lg:w-[30em] md:w-[40em] rounded-lg" />
-            <div className="absolute lg:right-5 xl:right-[12em]  right-[8em] md:right-[10em]">
-              <h3 className="text-[3.2em] font-bold">Get in touch with us</h3>
-              <p className="text-md font-normal mt-3">
+        <div className="relative  mx-0 text-papaya bg-black1">
+          <div className="flex pt-4  md:pt-5 ml-8 xl:ml-48">
+            <img src={desktop} alt="" className="w-[35em] max-sm:hidden h-[35em] xl:w-[35em] lg:h-[33em] lg:w-[35em] md:w-[25em] md:h-[33em] rounded-lg" />
+            <div className=" pl-4  w-[22.3em] rounded h-[35em] lg:ml-8 lg:w-[30em] xl:w-[40em] xl:ml-12 md:right-[10em]">
+              <h3 className="text-[2em] lg:text-[2.4em] xl:text-[2.6rem] font-bold">Get in touch with us</h3>
+              <p className="text-md font-normal mt-3 md:mt-0">
                 Feel free to reach out for more information.
               </p>
-              <div className="w-full mt-3">
-                <span className="me-3">
+              <div className="w-full flex flex-col xl:flex-row  sm:mt-2">
+                <span className="me-3 flex">
                   <i class="me-2 bi bi-envelope-fill text-red1"></i>
                   support@todoloo.com
                 </span>
-                <span className="me-2">
+                <span className="">
                   <i class="me-2 bi bi-telephone-fill text-red1"></i>
                   646-6565-656
                 </span>
               </div>
               <form className="flex flex-col mt-3">
-                <label className="text-xl" name="name">
+                <label className="text-xl md:text-lg text-ashgray mb-2" name="name">
                   Name
                 </label>
                 <input
                   type="text"
                   autocomplete="off"
                   name="name"
-                  class="input h-12 placeholder:text-magenta1 placeholder:italic"
+                  class="input h-12 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="Name"
                 />
-                <label className="text-xl" name="email">
+                <label className="text-xl md:text-lg text-ashgray mb-2" name="email">
                   Your email here
                 </label>
 
@@ -177,21 +177,21 @@ const Home = () => {
                   type="email"
                   autocomplete="off"
                   name="email"
-                  class="input h-12 placeholder:text-magenta1 placeholder:italic"
+                  class="input h-12 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="E-mail"
                 />
-                <label className="text-xl" name="email">
+                <label className="text-xl md:text-lg text-ashgray mb-2" name="email">
                   Message
                 </label>
                 <textarea
                   type="text"
                   name="message"
-                  class="input h-48 placeholder:text-magenta1 placeholder:italic"
+                  class="input h-36 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="Type in your message"
                 ></textarea>
                 <button
                   type="submit"
-                  className="border-lg border-1 w-36 p-2 md:bg-papaya font-bold uppercase md:text-black1 rounded-lg mt-3"
+                  className="w-36 p-2  text-black1 bg-papaya md:bg-papaya font-bold md:p-1 md:text-black1 rounded-lg mt-3 md:mt-3"
                 >
                   Send message
                 </button>
@@ -199,7 +199,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     );
 };
 

@@ -50,7 +50,7 @@ const handleClick = () =>{
   </>
   : 
   <>
-    <nav className="max-lg:hidden flex h-[3rem] text-[#f62f61] flex-row pl-0 pr-2 items-center">
+    <nav className="max-lg:hidden xl:w-full flex h-[3rem] text-[#f62f61] flex-row pl-0 pr-2 items-center">
         <Toaster />
       <div className="">
         <a href="/" className="text-2xl ms-4 font-bold text-decoration uppercase">TodoLoo</a>
