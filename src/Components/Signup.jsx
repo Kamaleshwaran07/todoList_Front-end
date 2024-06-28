@@ -91,6 +91,7 @@ const [show, setShow] = useState(true);
         console.log(values);
         
         const response = await axios.post(`${baseurl}/login`, values)
+        console.log(response.data);
         setIsAuthenticated(true)
         toast.success(response.data.message)
         setIsLoading(true)
