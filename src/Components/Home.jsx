@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import woman1 from '../assets/woman1.jpg'
-import woman2 from '../assets/woman2.png'
 import man from "../assets/man.jpg";
 import desktop from '../assets/desktop.jpg'
 import woman from '../assets/woman1.png'

@@ -54,7 +54,7 @@ const Contactus = ({baseurl}
                 name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="input h-12 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
+                className="input h-12 md:placeholder:text-papaya placeholder:text-papaya xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="Name"
               />
               <label className="font-semibold drop-shadow-sm md:text-ashgray mb-2 lg:text-ashgray mt-2 uppercase " htmlFor="email">
@@ -66,7 +66,7 @@ const Contactus = ({baseurl}
                 name="email"
                 value={email}
                 onChange={(e)=>setEmail(e.target.value)}
-                className="input h-12 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
+                className="input h-12 md:placeholder:text-papaya placeholder:text-papaya xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="E-mail"
               />
               <label className="font-semibold drop-shadow-sm md:text-ashgray mb-2 lg:text-ashgray mt-2 uppercase " htmlFor="message">
@@ -76,7 +76,7 @@ const Contactus = ({baseurl}
                 name="message"
                 value={message}
                 onChange={(e)=>setMessage(e.target.value)}
-                className="input h-40 md:h-36 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
+                className="input h-40 md:h-36 md:placeholder:text-papaya placeholder:text-papaya xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="Type in your message"
               ></textarea>
               <button
