@@ -88,12 +88,12 @@ const [show, setShow] = useState(true);
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       try {
+        console.log(values);
         
-      const response = await axios.post(`${baseurl}/login`, values)
-      console.log(values);
-      setIsAuthenticated(true)
-      toast.success(response.data.message)
-      setIsLoading(true)
+        const response = await axios.post(`${baseurl}/login`, values)
+        setIsAuthenticated(true)
+        toast.success(response.data.message)
+        setIsLoading(true)
       const token = response.data.token;
       const expires = new Date(new Date(Date.now() + 24 * 60 * 60 * 1000)).toUTCString()
       document.cookie = `token = ${token}; path=/; expires=${expires} `
