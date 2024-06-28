@@ -104,7 +104,7 @@ const [show, setShow] = useState(true);
       }, 1500);
 } catch (error) {
         // setErrorMsg(error.response.data.message)
-        // console.log(error.response.data.message);
+        console.log(error.response.data.message);
         toast.error(error.response.data.message)
 }
 
