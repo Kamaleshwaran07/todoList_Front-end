@@ -417,3 +417,53 @@ a {
   font-weight: 400;
   font-style: italic;
 }
+.animation{
+  animation-name: example;
+  animation-duration: 1s;
+}
+@keyframes example {
+  from {
+    right: -100px;
+  }
+  to{
+    right: 1px;
+  }
+}
+.animationClose{
+  animation-name: exampleClose;
+  animation-duration: 2s;
+  opacity: 0;
+}
+@keyframes exampleClose {
+  from {
+    right: 1px;
+  }
+  to{
+    right: -160px;
+  }
+}
+@media screen and (max-width:769px) {
+  @keyframes example {
+    from {
+      right: -150px;
+    }
+    to{
+      right: 1px;
+    }
+  }
+  
+  @keyframes exampleClose {
+    0% {
+      opacity: 1;
+      right: 1px;
+    }
+    50%{
+      /* right: -10px; */
+      opacity: .5;
+    }
+    100%{
+      right: -50px;
+      opacity: 0;
+    }
+  }
+}

@@ -111,7 +111,7 @@ const handleClick = () =>{
         <a href="/" className="text-2xl ms-4 font-bold text-decoration uppercase">TodoLoo</a>
       </div>
       <button type="button" className="ms-auto me-2" onClick={handleClick}><img src={burger} className="w-8 " /></button>
-      <ul className={isOpen ? "ms-auto flex flex-col absolute translate-x-[17rem] md:translate-x-[38rem] lg:translate-x-[54rem] z-10 bg-white w-[10em] h-[12em] mt-[15em] md:mt-[15em] md:pt-3 pt- rounded-l-lg items-center justify-evenly font-semibold uppercase text-center transition-transform duration-600 lg:pt-0 p-1" : "translate-x-[27rem] md:translate-x-[48rem] lg:translate-x-[64rem] mt-[15em] md:[15em] transition-transform duration-500 flex flex-col h-[12em] justify-evenly z-10 ms-auto -pt-[2rem] w-[10em] bg-white/50 rounded-l-lg text-center absolute items-center lg:p-1" }>
+      <ul className={isOpen ? "ms-auto animation flex flex-col absolute right-0  z-10 bg-white w-[10em] h-[12em] mt-[15em] md:mt-[15em] md:pt-3 pt- rounded-l-lg items-center justify-evenly font-semibold uppercase text-center transition-transform duration-600 lg:pt-0 p-1" : "mt-[15em] animationClose md:[15em]  transition-transform duration-500 flex flex-col h-[12em] justify-evenly z-10 ms-auto -pt-[2rem] w-[10em] bg-white/50 rounded-l-lg text-center absolute items-center lg:p-1" }>
         
       {token 
       ? 

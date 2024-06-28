@@ -16,7 +16,7 @@ const Home = () => {
       <div className='sedan'>
         {/* Hero Section */}
         <div className="grid grid-cols-3 hero gap-4">
-          <div className="heroHead relative mt-48 ml-2 md:ml-12 p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[25rem]">
+          <div className="heroHead relative mt-48 ml-2 md:ml-12 xl:w-[30em] p-3 shadow-lg bg-white/30 flex flex-col h-52 w-[25rem]">
             <h3 className="text-3xl uppercase font-bold text-">Todoloo</h3>
             <p className="text-xl mt-6 text-slate-100">
               Welcome to our Todo list site! Stay organized, productive, and
