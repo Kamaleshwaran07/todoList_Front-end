@@ -7,9 +7,23 @@ import man from "../assets/man.jpg";
 import desktop from '../assets/desktop.jpg'
 import woman from '../assets/woman1.png'
 import woman3 from '../assets/woman3.jpg'
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
-const Home = () => {
-  
+const Home = ({baseurl}) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+  const sendMail = async (e) =>{
+    e.preventDefault();
+    const payloads = {name, email, message}
+    try {
+    const response = await axios.post(`${baseurl}/sendemail`, payloads)
+      toast.success(response.data.message)
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+   }
 
  
     return (
@@ -158,7 +172,7 @@ const Home = () => {
                   646-6565-656
                 </span>
               </div>
-              <form className="flex flex-col mt-3">
+              <form className="flex flex-col mt-3" onSubmit={sendMail}>
                 <label className="text-xl md:text-lg text-ashgray mb-2" name="name">
                   Name
                 </label>
@@ -166,6 +180,8 @@ const Home = () => {
                   type="text"
                   autocomplete="off"
                   name="name"
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
                   class="input h-12 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="Name"
                 />
@@ -177,6 +193,8 @@ const Home = () => {
                   type="email"
                   autocomplete="off"
                   name="email"
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   class="input h-12 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="E-mail"
                 />
@@ -186,6 +204,8 @@ const Home = () => {
                 <textarea
                   type="text"
                   name="message"
+                  value={message}
+                  onChange={(e)=>setMessage(e.target.value)}
                   class="input h-36 w-72 lg:w-[22rem] placeholder:text-ashgray  placeholder:italic"
                   placeholder="Type in your message"
                 ></textarea>

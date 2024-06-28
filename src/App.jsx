@@ -4,7 +4,6 @@ import Home from './Components/Home';
 
 import Navbar from './Components/Navbar';
 import Signup from './Components/Signup';
-import Login from './Components/Login';
 import Contactus from './Components/Contactus';
 import Dashboard from './Components/Dashboard';
 
@@ -17,7 +16,7 @@ const App = () => {
       <BrowserRouter>
         <Navbar baseurl={baseurl} setIsAuthenticated={setIsAuthenticated} isAuthenticated={isAuthenticated} setUniLoading = {setUniLoading} uniLoading = {uniLoading} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home baseurl={baseurl} />} />
           <Route
             path="/signup"
             element={
@@ -27,7 +26,7 @@ const App = () => {
               />
             }
           />
-          <Route path="/login" element={<Login baseurl={baseurl} />} />
+        
           <Route path="/contactus" element={<Contactus baseurl={baseurl} />} />
           <Route path="/dashboard" element={<Dashboard baseurl={baseurl} uniLoading = {uniLoading} />} />
         </Routes>

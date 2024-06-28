@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import desktop from "../assets/desktop.jpg";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-const Contactus = () => {
-  return (
-    <div className="contactus h-screen xl:h-full lg:overflow-y-hidden">
+const Contactus = ({baseurl}
+) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("")
+  const [message, setMessage] = useState("")
+
+
+ const sendMail = async (e) =>{
+  e.preventDefault();
+  const payloads = {name, email, message}
+  try {
+  const response = await axios.post(`${baseurl}/sendemail`, payloads)
+    toast.success(response.data.message)
+  } catch (error) {
+    toast.error(error.response.data.message);
+  }
+ }
+        return (
+          <div className="contactus h-screen xl:h-full lg:overflow-y-hidden">
       <div className="xl:w-full xl:h-[93.5vh] h-full lg:h-[92.6vh] text-papaya md:text-papaya bg-black1">
         <div className="flex p-2  mt-0 xl:h- h-full relative">
           <img
@@ -26,7 +44,7 @@ const Contactus = () => {
                 646-6565-656
               </span>
             </div>
-            <form className="flex flex-col mt-3">
+            <form className="flex flex-col mt-3" onSubmit={sendMail}>
               <label className="font-semibold drop-shadow-sm md:text-ashgray mb-2 lg:text-ashgray uppercase " htmlFor="name">
                 Name
               </label>
@@ -34,6 +52,8 @@ const Contactus = () => {
                 type="text"
                 autoComplete="off"
                 name="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="input h-12 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="Name"
               />
@@ -44,6 +64,8 @@ const Contactus = () => {
                 type="email"
                 autoComplete="off"
                 name="email"
+                value={email}
+                onChange={(e)=>setEmail(e.target.value)}
                 className="input h-12 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="E-mail"
               />
@@ -52,6 +74,8 @@ const Contactus = () => {
               </label>
               <textarea
                 name="message"
+                value={message}
+                onChange={(e)=>setMessage(e.target.value)}
                 className="input h-40 md:h-36 md:placeholder:text-papaya placeholder:text-black1 xl:placeholder:text-papaya lg:placeholder:text-ashgray -ms-1"
                 placeholder="Type in your message"
               ></textarea>
