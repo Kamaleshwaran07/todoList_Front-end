@@ -97,7 +97,7 @@ const [show, setShow] = useState(true);
         setIsLoading(true)
       const token = response.data.token;
       const expires = new Date(new Date(Date.now() + 24 * 60 * 60 * 1000)).toUTCString()
-      document.cookie = `token = ${token}; path=/; expires=${expires} `
+      document.cookie = `token = ${token}; path=/; expires=${expires}; secure:true; sameSite:'none'; httpOnly:true; `
       setTimeout(() => {
         setIsLoading(false)
         navigate("/dashboard");
