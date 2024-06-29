@@ -96,7 +96,6 @@ const [show, setShow] = useState(true);
         toast.success(response.data.message)
         setIsLoading(true)
       const token = response.data.token;
-     
       const expires = new Date(new Date(Date.now() + 24 * 60 * 60 * 1000)).toUTCString()
       document.cookie = `token = ${token}; path=/; expires=${expires}; secure:true; sameSite:'none'; httpOnly:true;`
       setTimeout(() => {
