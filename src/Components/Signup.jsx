@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup'
 import yuppassword from 'yup-password'
 import Loader from './Loader.jsx'
-// import Cookies from 'js-cookies'
-// import {jwtDecode} from 'jwt-decode'
+// import jwt from 'jsonwebtoken';
+// import dotenv from 'dotenv'
 // import ToastContainer from './ToastContainer';
 
 
@@ -96,11 +96,12 @@ const [show, setShow] = useState(true);
         toast.success(response.data.message)
         setIsLoading(true)
       const token = response.data.token;
+     
       const expires = new Date(new Date(Date.now() + 24 * 60 * 60 * 1000)).toUTCString()
-      document.cookie = `token = ${token}; path=/; expires=${expires}; secure:true; sameSite:'none'; httpOnly:true; `
+      document.cookie = `token = ${token}; path=/; expires=${expires}; secure:true; sameSite:'none'; httpOnly:true;`
       setTimeout(() => {
-        setIsLoading(false)
         navigate("/dashboard");
+        setIsLoading(false)
       }, 1500);
 } catch (error) {
         // setErrorMsg(error.response.data.message)
